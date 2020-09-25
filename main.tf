@@ -26,7 +26,7 @@ terraform {
 }
 
 resource "aws_s3_bucket" "bucket" {
-  bucket = "data-manual"
+  bucket = "data-horm-codes-manual"
   acl    = "private"
 
   cors_rule {
@@ -43,7 +43,7 @@ resource "aws_s3_bucket" "bucket" {
 }
 
 resource "aws_s3_bucket" "automated_bucket" {
-  bucket = "data"
+  bucket = "data-horm-codes"
   acl    = "private"
 
   cors_rule {
