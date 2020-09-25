@@ -15,7 +15,7 @@ exec kscript $0 "$@"
 data class Project(val id: String, val name: String)
 
 val API_URL = "https://api.clickup.com/api/v2"
-val HELP_NOTE = "Run script in following way: kscript track_time.kts PERSONAL_CLICKUP_TOKEN"
+val HELP_NOTE = "Run script in following way: kscript snowball_track_time.kts PERSONAL_CLICKUP_TOKEN"
 val PROJECTS = listOf(
         Project("20fjmw", "D4"),
         Project("20hrxh", "Okay"),
