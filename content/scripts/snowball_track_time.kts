@@ -9,24 +9,18 @@ exec kscript $0 "$@"
 \*** IMPORTANT: Any code including imports and annotations must come after this line ***/
 
 
-
 //DEPS khttp:khttp:1.0.0
 
-import Snowball_track_time.Constants.API_URL
-import Snowball_track_time.Constants.HELP_NOTE
-import Snowball_track_time.Constants.PROJECTS
 
 data class Project(val id: String, val name: String)
 
-object Constants {
-    const val API_URL = "https://api.clickup.com/api/v2"
-    const val HELP_NOTE = "Run script in following way: kscript track_time.kts PERSONAL_CLICKUP_TOKEN"
-    val PROJECTS = listOf(
-            Project("20fjmw", "D4"),
-            Project("20hrxh", "Okay"),
-            Project("20hrz4", "Snowball")
-    )
-}
+val API_URL = "https://api.clickup.com/api/v2"
+val HELP_NOTE = "Run script in following way: kscript track_time.kts PERSONAL_CLICKUP_TOKEN"
+val PROJECTS = listOf(
+        Project("20fjmw", "D4"),
+        Project("20hrxh", "Okay"),
+        Project("20hrz4", "Snowball")
+)
 
 
 fun getUrlForTimeTracking(taskId: String): String {
