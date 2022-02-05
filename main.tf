@@ -1,4 +1,4 @@
-variable domain {
+variable "domain" {
   type = string
 }
 
@@ -31,12 +31,12 @@ resource "aws_s3_bucket" "bucket" {
 
   cors_rule {
     allowed_headers = [
-      "Authorization"]
+    "Authorization"]
     allowed_methods = [
       "GET",
-      "HEAD"]
+    "HEAD"]
     allowed_origins = [
-      "*"]
+    "*"]
     expose_headers  = []
     max_age_seconds = 3000
   }
@@ -48,12 +48,12 @@ resource "aws_s3_bucket" "automated_bucket" {
 
   cors_rule {
     allowed_headers = [
-      "Authorization"]
+    "Authorization"]
     allowed_methods = [
       "GET",
-      "HEAD"]
+    "HEAD"]
     allowed_origins = [
-      "*"]
+    "*"]
     expose_headers  = []
     max_age_seconds = 3000
   }
@@ -70,12 +70,12 @@ resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
 
 data "aws_iam_policy_document" "distribution_policy" {
   statement {
-    actions   = [
-      "s3:GetObject"]
+    actions = [
+    "s3:GetObject"]
     principals {
-      type        = "AWS"
+      type = "AWS"
       identifiers = [
-        aws_cloudfront_origin_access_identity.origin_access_identity.iam_arn]
+      aws_cloudfront_origin_access_identity.origin_access_identity.iam_arn]
     }
     resources = [
       "${aws_s3_bucket.bucket.arn}/*",
@@ -85,10 +85,10 @@ data "aws_iam_policy_document" "distribution_policy" {
 
 data "aws_iam_policy_document" "automated_distribution_policy" {
   statement {
-    actions   = [
-      "s3:GetObject"]
+    actions = [
+    "s3:GetObject"]
     principals {
-      type        = "AWS"
+      type = "AWS"
       identifiers = [
         aws_cloudfront_origin_access_identity.origin_access_identity.iam_arn
       ]
@@ -118,7 +118,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
         403,
         404,
         500,
-        502]
+      502]
     }
 
     member {
@@ -153,15 +153,15 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   is_ipv6_enabled = true
 
   aliases = [
-    var.domain]
+  var.domain]
 
   default_cache_behavior {
-    allowed_methods  = [
+    allowed_methods = [
       "GET",
-      "HEAD"]
-    cached_methods   = [
+    "HEAD"]
+    cached_methods = [
       "GET",
-      "HEAD"]
+    "HEAD"]
     target_origin_id = local.group_origin_id
 
     forwarded_values {
@@ -193,9 +193,9 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   }
 
   custom_error_response {
-    error_code = 403
+    error_code            = 403
     error_caching_min_ttl = 10
-    response_page_path = "/index.html"
-    response_code = 404
+    response_page_path    = "/index.html"
+    response_code         = 404
   }
 }
